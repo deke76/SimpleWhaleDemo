@@ -4,7 +4,6 @@ name: CI to Docker Hub
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
     tags:
       - "v*.*.*"
@@ -54,5 +53,6 @@ jobs:
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
+          
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
